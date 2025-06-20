@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Hashtags Generator</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='insta.png') }}"/>
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <h1>Instagram Hashtags Generator</h1>
+        <form id="descriptionForm" method="post">
+            <label for="input_text">Input Text:</label><br>
+            <textarea id="input_text" name="input_text" rows="4" cols="50" onkeydown="submitOnEnter(event)" style="resize: none;">{{ original_input }}</textarea><br>
+            <button type="submit">Generate Description</button>
+        </form>
+
+        {% if description %}
+        <div class="result">
+            <h2>Generated Description and Hashtags:</h2>
+            <pre>{{ description|safe }}</pre>
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        function submitOnEnter(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                document.getElementById('descriptionForm').submit();
+            }
+        }
+    </script>
+</body>
+</html>
